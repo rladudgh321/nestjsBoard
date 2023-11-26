@@ -1,0 +1,56 @@
+# findAll
+GET http://127.0.0.1:3000/board
+
+###
+
+#findOne
+GET http://127.0.0.1:3000/board/101
+
+###
+
+#create
+POST http://127.0.0.1:3000/board
+content-type: application/json
+
+{
+    "userId": 1,
+    "contents": "ccccccc"
+}
+
+###
+
+#update
+PATCH http://127.0.0.1:3000/board/8
+content-type: application/json
+
+{
+    "contents": "updateContent9"
+}
+
+###
+
+#delete
+
+DELETE http://127.0.0.1:3000/board/16
+
+
+###
+
+GET http://127.0.0.1:3000
+
+
+###
+# GetUsers 버추얼 컬럼 User_boardCount // 
+# 회원 리스트
+GET http://127.0.0.1:3000/user
+
+###
+#유저 회원 가입
+POST http://127.0.0.1:3000/user
+content-type: application/json
+
+{
+    "username": "fastcampus12",
+    "name": "fastcampusname",
+    "password": "fastcampuspassword"
+}
