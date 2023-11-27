@@ -6,6 +6,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { hash, compare } from 'bcrypt';
 import { LoginUserDto } from './dto/login-user.dto';
+import jwt from 'jsonwebtoken';
+
 
 @Injectable()
 export class UserService {
@@ -25,7 +27,17 @@ export class UserService {
         const match = await compare(password, user.password);
         if(!match) throw new HttpException('Not_Found', HttpStatus.UNAUTHORIZED)
 
-        return user;
+        const payload = { 
+            username,
+            name: user.name
+        }
+
+        const accessToken = jwt.sign(payload, 'wejfkl', {
+            expiresIn:10,
+            issuer:'kyh'
+        });
+
+        return { accessToken };
     }
 
 
@@ -55,6 +67,10 @@ export class UserService {
         }, 'User_boardCount') // 반환값 이름 정해주기
         return qb.getMany();
     }
+
+
+    
+    
 }
 
 
